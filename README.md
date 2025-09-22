@@ -13,3 +13,7 @@ Burciaga Renteria Dana Paola
 
 ## Analisis de base de datos 
  
+
+
+![Texto alternativo](burciaga.jpg)
+![Texto alternativo](Antonio.jpg)
