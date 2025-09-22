@@ -8,4 +8,8 @@ el otro proposito de este proyecto es ayudar a los usuarios a llevar un control 
 
 ## integrantes
 Antonio Marin Luis Jesus
+
 Burciaga Renteria Dana Paola
+
+## Analisis de base de datos 
+ 
