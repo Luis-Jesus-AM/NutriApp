@@ -194,6 +194,7 @@ A continuación, se presentan los principales resultados obtenidos de la encuest
 
 
 # pon aqui las imagenes
+- ![Texto alternativo](static/1.jpg)
 
 
 
