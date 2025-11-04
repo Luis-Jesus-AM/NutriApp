@@ -17,10 +17,12 @@ el otro proposito de este proyecto es ayudar a los usuarios a llevar un control 
 - **Especialidad:** Programacion
 -  **Institucion:** Cetis 61
 -  ![Texto alternativo](static/burciaga2.jpg)
+  
 
 
 
-## Analisis de base de datos 
+  
+# Analisis de base de datos 
 
 
 # ¿Qué funcionalidad puede tener una app nutricional?
@@ -194,7 +196,24 @@ A continuación, se presentan los principales resultados obtenidos de la encuest
 
 
 # pon aqui las imagenes
-- ![Texto alternativo](static/1.jpg)
+- ![Texto alternativo](static/1.png)
+- ![Texto alternativo](static/2.png)
+- ![Texto alternativo](static/3.png)
+- ![Texto alternativo](static/4.png)
+- ![Texto alternativo](static/5.png)
+- ![Texto alternativo](static/6.png)
+- ![Texto alternativo](static/7.png)
+- ![Texto alternativo](static/8.png)
+- ![Texto alternativo](static/9.png)
+- ![Texto alternativo](static/10.png)
+- ![Texto alternativo](static/11.png)
+- ![Texto alternativo](static/12.png)
+- ![Texto alternativo](static/13.png)
+- ![Texto alternativo](static/14.png)
+- ![Texto alternativo](static/15.png)
+- ![Texto alternativo](static/16.png)
+
+  
 
 
 
@@ -234,11 +253,58 @@ los usuarios buscan una aplicación moderna, confiable y fácil de entender, que
 
 
 
+# Investigacion APIs
+
+## Tablas comparativas
+
+## Introducción
+En este documento realizamos las pruebas necesarias para seleccionar la mejor API para el trabajo que vamos a realizar. Esto nos ayuda a evitar problemas con el manejo de las APIs durante el proyecto.
+
+---
+
+## Tabla comparativa de APIs
+
+| Característica | Edamam | Nutritionix | Spoonacular |
+|---|---|---:|---|
+| **Tipo de datos que proporciona** | Información nutricional detallada por ingrediente, receta o texto libre. Incluye macros, micros, información sobre alergias y dietas. | Base de datos de alimentos de marcas comerciales, genéricos y de restaurantes. Datos de calorías, macros y micros. | Datos de recetas, información nutricional, sugerencias de menú, equivalentes de alimentos y reconocimiento de ingredientes por imagen. |
+| **Costo (planes gratuitos)** | Developer Plan (Gratuito) | Developer Plan (Gratuito) | Developer Tier (Gratuito) |
+| **Límites de uso** | 1,000 solicitudes/mes y 10,000 calorías/mes. No para uso comercial. | 1,000 solicitudes/mes y 100 búsquedas al día. Uso comercial limitado. | 150 solicitudes/día para búsqueda de recetas y 500 solicitudes/día para otros endpoints. |
+| **Facilidad de implementación** | Fácil. API RESTful y usa JSON. Los parámetros de consulta son claros. | Moderada. Requiere un poco más de configuración inicial. La estructura de solicitudes y respuestas es intuitiva. | Fácil. La documentación es clara y los ejemplos de código son útiles. Ofrece muchos endpoints para diferentes tipos de datos. |
+| **Calidad de documentación** | Excelente. La documentación es completa, bien organizada y fácil de seguir. Incluye ejemplos de código en varios lenguajes. | Buena. Ofrece una guía de inicio rápido y una referencia de API detallada. Los ejemplos son suficientes para empezar. | Excelente. La documentación es muy detallada y proporciona ejemplos claros para cada endpoint, junto con los modelos de respuesta JSON. |
+
+---
+
+## API seleccionada y justificación
+La API seleccionada fue **Spoonacular** por las siguientes razones:
+
+- Ofrece una amplia gama de funcionalidades más allá de la información nutricional (búsqueda de recetas, creación de planes de comida, reconocimiento de ingredientes por imagen).  
+- Excelente documentación y ejemplos claros.  
+- Límites de uso generosos en el plan gratuito, útiles para desarrollo y aprendizaje.  
+- Su manejo para crear planes de comida nos ahorra trabajo y tiempo de implementación.
+
+---
+
+## Pruebas de solicitudes con Postman
+A continuación, se presenta un ejemplo  de solicitud con Postman y como este devuelve un tipo de código:
+
+- ![Texto alternativo](static/poos.png)
 
 
+## Dificultades encontradas y soluciones
 
+Al consultar la API nos dimos cuenta de algunos problemas que hacían su uso un poco dificultoso. Estos problemas eran comunes debido a que no habíamos trabajado con APIs de esta manera anteriormente, lo cual generó confusiones.
 
+### Error de autenticación
+**Problema:** La API devolvía un error de autenticación.  
+**Solución:** Se verificó que el parámetro `apiKey` estuviera correctamente incluido en la solicitud y que no tuviera errores de escritura.
 
+### Formato de la solicitud POST
+**Problema:** El endpoint de análisis de ingredientes requería un formato de datos específico (`application/x-www-form-urlencoded`), diferente al formato que se usó inicialmente.  
+**Solución:** Se consultó la documentación para confirmar el tipo de contenido requerido y se ajustó la solicitud en Postman para enviar los datos en el formato correcto.
+
+### Límites de uso diarios
+**Problema:** Al tener un límite diario de solicitudes, las pruebas debían hacerse con cuidado para evitar agotar los intentos disponibles.  
+**Solución:** Se planificaron mejor las pruebas para no exceder los límites y evitar tener que esperar un día para continuar.
 
 
 
