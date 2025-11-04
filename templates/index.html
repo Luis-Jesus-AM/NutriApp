@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block contenido %}
+<div class="text-center mb-5">
+    <h1 class="fw-bold">Que necesitas hoy?</h1>
+</div>
+
+
+
+<div class="row g-5">
+
+    <style>.btn-calcu {background-color: #2072B1 !important}</style>
+<div class="col-md-4">
+    
+    <div class="card shadow-sm border-0 h-100">
+        <img src="static/ingre.jpg" style="height: 200px; object-fit: cover;" class="card-img-top" alt="Calculadora Nutricional">
+        <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Buscar recetas por ingredientes</h5>
+            <p class="card-text text-muted">
+                que ingredientes tenemos, listo para cocinar? 
+            </p>
+            <a href="/ingre" class="btn btn-calcu w-100" style="color: white;">Vamos</a>
+        </div>
+    </div>
+</div>
+
+    <style>.btn-dieta {background-color: #2072B1 !important}</style>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <img src="static/comida.jpg" style="height: 200px; object-fit: cover;" class="card-img-top" alt="Planes de Dieta">
+            <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Obtener información nutricional</h5>
+                <p class="card-text text-muted">
+                    que estamos comiendo?
+                </p>
+                <a href="/nutrien" class="btn btn-dieta w-100" style="color: white;">Vamos</a>
+            </div>
+        </div>
+    </div>
+
+    <style>.btn-progreso {background-color: #2072B1 !important}</style>
+        <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <img src="static/nuto.jpg" style="height: 200px; object-fit: cover;" class="card-img-top" alt="Progreso">
+            <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Analizar texto de comida</h5>
+                <p class="card-text text-muted">
+                    cuales son los nutrientes de esta comida?
+                </p>
+                <a href="/comida" class="btn btn-progreso w-100" style="color: white;">Vamos</a>
+            </div>
+        </div>
+    </div>
+    
+    <style>.btn-progreso {background-color: #2072B1 !important}</style>
+        <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+            <img src="static/" style="height: 200px; object-fit: cover;" class="card-img-top" alt="hols">
+            <div class="card-body text-center">
+                <h5 class="card-title fw-bold">Clase</h5>
+                <p class="card-text text-muted">
+                    que va aqui?
+                </p>
+                <a href="/progreso" class="btn btn-progreso w-100" style="color: white;">Vamos</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

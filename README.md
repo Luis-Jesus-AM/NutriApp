@@ -11,12 +11,12 @@ el otro proposito de este proyecto es ayudar a los usuarios a llevar un control 
 - **Correo electronico:** 23308060610060@cetis61.edu.mx
 - **Especialidad:** Programacion
 - **Institucion:** Cetis 61
-- ![Texto alternativo](Antonio2.jpg)
+- ![Texto alternativo](static/Antonio2.jpg)
 - **Nombre completo:** Burciaga renteria Dana paola
 - **Correo electronico:** 23308060610289@cetis61.edu.mx
 - **Especialidad:** Programacion
 -  **Institucion:** Cetis 61
--  ![Texto alternativo](burciaga2.jpg)
+-  ![Texto alternativo](static/burciaga2.jpg)
 
 
 
