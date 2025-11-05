@@ -18,5 +18,9 @@ def comida():
 def ingre():
     return render_template("ingre.html")
 
+@app.route("/iniciar")
+def iniciar():
+    return render_template("iniciar.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
