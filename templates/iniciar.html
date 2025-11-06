@@ -1,10 +1,122 @@
 {% extends "base.html" %}
-
 {% block contenido %}
-<div class="text-center mb-5">
-    <h1 class="fw-bold">Todo listo!</h1>
+<div class="container mt-5">
+  <div class="text-center mb-5">
+    <h1 class="fw-bold">Únete a nuestro equipo!</h1>
+  </div>
+
+  <form class="mx-auto" style="max-width: 500px;">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" class="form-control" placeholder="Nombre">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Apellido</label>
+      <input type="text" class="form-control" placeholder="Apellido">
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Altura (cm)</label>
+        <input type="number" class="form-control" placeholder="Ej: 175">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Peso (kg)</label>
+        <input type="number" class="form-control" placeholder="Ej: 70">
+      </div>
+    </div>
+
+    <div class="mb-3 mt-3">
+      <label class="form-label">Edad</label>
+      <input type="number" class="form-control" placeholder="Edad">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" placeholder="ejemplo@email.com">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Género</label>
+      <select class="form-select">
+        <option selected disabled>Selecciona una opción</option>
+        <option>Hombre</option>
+        <option>Mujer</option>
+        <option>Otro</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Contraseña</label>
+      <input type="password" class="form-control" placeholder="Contraseña">
+    </div>
+
+    
+    <div class="mb-3">
+      <label class="form-label">Objetivos</label>
+      <select class="form-select">
+        <option selected disabled>Selecciona una opción</option>
+        <option>Bajar de peso</option>
+        <option>Aumentar masa muscular</option>
+        <option>Mantener peso</option>
+        <option>Mejorar digestión</option>
+        <option>¿Controlar una condición (diabetes, hipertensión)?</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Restriciones(Alergias, intorlerancias)</label>
+      <select class="form-select">
+        <option selected disabled>Selecciona una opción</option>
+        <option>maní</option>
+        <option>mariscos</option>
+        <option>aguacate</option>
+        <option>sandia</option>
+        <option>gluten</option>
+        <option>lactosa</option>
+        <option>otros</option>
+      </select>
+    </div>
+
+      <div class="mb-3">
+      <label class="form-label">Preferencias(Dietas, Alimentos que no te gustan)</label>
+      <select class="form-select">
+        <option selected disabled>Selecciona una opción</option>
+        <option>vegana</option>
+        <option>vegetariana</option>
+        <option>keto</option>
+        <option>mediterránea</option>
+        <option>otros</option>
+      </select>
+    </div>
+
+
+       <div class="mb-3">
+      <label class="form-label">Nivel de Experiencia </label>
+      <select class="form-select">
+        <option selected disabled>Selecciona una opción</option>
+        <option>vegana</option>
+        <option>vegetariana</option>
+        <option>keto</option>
+        <option>mediterránea</option>
+        <option>otros</option>
+      </select>
+    </div>
+
+
+    <div class="form-check mb-4">
+      <input class="form-check-input" type="checkbox" id="termsCheck">
+      <label class="form-check-label" for="termsCheck">
+        Acepto los términos y condiciones
+      </label>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary w-100">Enviar</button>
+    </div>
+
+
+  </form>
 </div>
-
-
-
 {% endblock %}
