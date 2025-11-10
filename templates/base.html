@@ -12,26 +12,54 @@
 
         body {background-color: #E9F3FB;}
         nav {background-color: #19598A;}
+        footer {background-color: #19598A;}
 
 
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark shadow">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/">🥗 FoodFit</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="nav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/">Mi dieta</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/registros">Registrarse</a></li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark shadow">
+    <div class="container">
+        
+        <a class="navbar-brand fw-bold" href="/">🥗 FoodFit</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto">
+
+                {% if "usuario" in session %}
+                
+                <!-- Solo si está logueado -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="/nutrien">Mi dieta</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-bold" href="/cerrar-sesion">Cerrar sesión</a>
+                </li>
+
+                {% else %}
+
+                <!-- Solo si NO está logueado -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="/sesion">Iniciar sesión</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/registros">Registrarse</a>
+                </li>
+
+                {% endif %}
+
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
 
     <div class="container py-5">

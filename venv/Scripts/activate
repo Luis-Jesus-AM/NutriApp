@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath "C:\Users\Lenovo 14 x360 Touch\Desktop\sabado\NutriApp\venv")
+    export VIRTUAL_ENV=$(cygpath "C:\Users\Lenovo 14 x360 Touch\Desktop\domingo\NutriApp\venv")
 else
     # use the path as-is
-    export VIRTUAL_ENV="C:\Users\Lenovo 14 x360 Touch\Desktop\sabado\NutriApp\venv"
+    export VIRTUAL_ENV="C:\Users\Lenovo 14 x360 Touch\Desktop\domingo\NutriApp\venv"
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"
