@@ -27,6 +27,11 @@ def index():
 def nutrien():
     return render_template("nutrien.html")
 
+
+@app.route("/perfil")
+def perfil():
+    return render_template("perfil.html")
+
 @app.route("/sesion")
 def sesion():
     return render_template("sesion.html")

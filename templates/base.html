@@ -8,13 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-
-
         body {background-color: #E9F3FB;}
         nav {background-color: #19598A;}
         footer {background-color: #19598A;}
-
-
     </style>
 </head>
 
@@ -33,18 +29,20 @@
 
                 {% if "usuario" in session %}
                 
-                <!-- Solo si está logueado -->
+                
                 <li class="nav-item">
-                    <a class="nav-link active" href="/nutrien">Mi dieta</a>
+                    <a class="nav-link active" href="/perfil">Perfil</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link text-danger fw-bold" href="/cerrar-sesion">Cerrar sesión</a>
                 </li>
 
+                
+
                 {% else %}
 
-                <!-- Solo si NO está logueado -->
+                
                 <li class="nav-item">
                     <a class="nav-link active" href="/sesion">Iniciar sesión</a>
                 </li>
