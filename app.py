@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 app = Flask(__name__)
 
 app.secret_key = "wey_donde_estoy"
+API_KEY = "a60788476b1c464aa61639e385e8fbed"
 
 def calcular_imc(peso, altura_cm):
     altura_m = altura_cm / 100
@@ -67,7 +68,7 @@ def index():
 def nutrien():
     return render_template("nutrien.html")
 
-from flask import request, render_template
+
 
 @app.route('/calculadora', methods=['GET', 'POST'])
 def calculadora_tmb_get():
@@ -148,10 +149,53 @@ def iniciar_sesion():
 def registros():
     return render_template("registros.html")
 
-@app.route("/comida")
-@login_requerido
-def comida():
-    return render_template("comida.html")
+@app.route("/gasto", methods=["GET", "POST"])
+def gasto():
+    resultado_tmb = None
+    resultado_get = None
+    error = None
+
+    if request.method == "POST":
+        try:
+            peso = float(request.form["peso"])
+            altura = float(request.form["altura"])
+            edad = int(request.form["edad"])
+            genero = request.form["genero"]
+            actividad = request.form["actividad"]
+
+            if peso <= 0 or altura <= 0 or edad <= 0:
+                raise ValueError("Todos los valores deben ser positivos.")
+
+            if genero == "hombre":
+                tmb = 66.473 + (13.7516 * peso) + (5.0033 * altura) - (6.755 * edad)
+            elif genero == "mujer":
+                tmb = 655.0955 + (9.5634 * peso) + (1.8496 * altura) - (4.6756 * edad)
+            else:
+                raise ValueError("Género no válido.")
+
+            factores = {
+                "sedentario": 1.2,
+                "ligero": 1.375,
+                "moderado": 1.55,
+                "alto": 1.725,
+                "muy_alto": 1.9
+            }
+
+            if actividad not in factores:
+                raise ValueError("Nivel de actividad no válido.")
+
+            get_total = tmb * factores[actividad]
+
+            resultado_tmb = f"{tmb:.2f}"
+            resultado_get = f"{get_total:.2f}"
+
+        except Exception as e:
+            error = f"Error: {str(e)}"
+
+    return render_template("gasto.html",
+                           tmb=resultado_tmb,
+                           get=resultado_get,
+                           error=error)
 
 
 @app.route("/peso")
@@ -187,16 +231,41 @@ def ingre():
 def imc():
     return render_template("imc.html")
 
-@app.route("/imcc", methods=["GET", "POST"])
-def imcc():
-    imc_val = None
-    cat = None
+@app.route("/imc", methods=["GET", "POST"])
+def imc():
+    resultado_imc = None
+    categoria = None
+    error = None
+
     if request.method == "POST":
-        peso = float(request.form["peso"])
-        altura = float(request.form["altura"])
-        imc_val = calcular_imc(peso, altura)
-        cat = categoria_imc(imc_val)
-    return render_template("imc.html", imcc=imc_val, categoria=cat)
+        try:
+            peso = float(request.form["peso"])
+            altura = float(request.form["altura"])
+
+            if peso <= 0 or altura <= 0:
+                raise ValueError("Los valores deben ser positivos.")
+
+            altura_m = altura / 100
+            imc = peso / (altura_m ** 2)
+            resultado_imc = f"{imc:.2f}"
+
+            if imc < 18.5:
+                categoria = "Bajo peso"
+            elif 18.5 <= imc < 24.9:
+                categoria = "Normal"
+            elif 25 <= imc < 29.9:
+                categoria = "Sobrepeso"
+            else:
+                categoria = "Obesidad"
+
+        except Exception as e:
+            error = f"Error: {str(e)}"
+
+    return render_template("imc.html",
+                        imc=resultado_imc,
+                        categoria=categoria,
+                        error=error)
+
 
 @app.route("/cerrar-sesion")
 def cerrar_sesion():
