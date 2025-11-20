@@ -3,6 +3,21 @@ app = Flask(__name__)
 
 app.secret_key = "wey_donde_estoy"
 
+def calcular_imc(peso, altura_cm):
+    altura_m = altura_cm / 100
+    imc = peso / (altura_m ** 2)
+    return round(imc, 1)
+
+def categoria_imc(imc):
+    if imc < 18.5:
+        return "Bajo peso"
+    elif 18.5 <= imc < 25:
+        return "Peso normal"
+    elif 25 <= imc < 30:
+        return "Sobrepeso"
+    else:
+        return "Obesidad"
+
 
 
 
@@ -48,6 +63,7 @@ def index():
     return render_template("index.html")
 
 @app.route("/nutrien")
+@login_requerido
 def nutrien():
     return render_template("nutrien.html")
 
@@ -137,10 +153,50 @@ def registros():
 def comida():
     return render_template("comida.html")
 
+
+@app.route("/peso")
+@login_requerido
+def peso():
+    return render_template("peso.html")
+
+@app.route("/ideal", methods=["GET", "POST"])
+def ideal():
+    peso = None
+    edad = None
+    if request.method == "POST":
+        altura = int(request.form["altura"])
+        sexo = request.form["sexo"]
+        edad = int(request.form["edad"])
+        if altura < 152:
+            altura = 152
+        if sexo == "hombre":
+            peso = 50 + 0.9 * (altura - 152)
+        else:
+            peso = 45.5 + 0.9 * (altura - 152)
+        peso = round(peso, 1)
+    return render_template("peso.html", peso=peso, edad=edad)
+
+
 @app.route("/ingre")
 @login_requerido
 def ingre():
     return render_template("ingre.html")
+
+@app.route("/imc")
+@login_requerido
+def imc():
+    return render_template("imc.html")
+
+@app.route("/imcc", methods=["GET", "POST"])
+def imcc():
+    imc_val = None
+    cat = None
+    if request.method == "POST":
+        peso = float(request.form["peso"])
+        altura = float(request.form["altura"])
+        imc_val = calcular_imc(peso, altura)
+        cat = categoria_imc(imc_val)
+    return render_template("imc.html", imcc=imc_val, categoria=cat)
 
 @app.route("/cerrar-sesion")
 def cerrar_sesion():

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="text-center mb-5">
+    <h1 class="fw-bold">Todo cuerpo es perfecto</h1>
+</div>
+
+<div class="container" style="max-width: 500px;">
+    <form method="POST" class="p-4 border rounded shadow">
+        <div class="mb-3">
+            <label class="form-label">Edad</label>
+            <input type="number" class="form-control" name="edad" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Altura (cm)</label>
+            <input type="number" class="form-control" name="altura" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Sexo</label>
+            <select class="form-select" name="sexo" required>
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit">Calcular</button>
+    </form>
+
+    {% if peso %}
+    <div class="alert alert-success text-center mt-4">
+        <h4>Peso ideal aproximado: {{ peso }} kg</h4>
+        <p>Edad: {{ edad }} años</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
