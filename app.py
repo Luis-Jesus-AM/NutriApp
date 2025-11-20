@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 app = Flask(__name__)
 
-app.secret_key = "clave_super_secreta"
+app.secret_key = "wey_donde_estoy"
+
+
 
 
 def calcular_tmb(peso, altura, edad, genero):
