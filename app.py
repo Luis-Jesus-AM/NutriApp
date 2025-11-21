@@ -193,9 +193,9 @@ def gasto():
             error = f"Error: {str(e)}"
 
     return render_template("gasto.html",
-                           tmb=resultado_tmb,
-                           get=resultado_get,
-                           error=error)
+                        tmb=resultado_tmb,
+                        get=resultado_get,
+                        error=error)
 
 
 @app.route("/peso")
