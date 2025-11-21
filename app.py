@@ -66,7 +66,7 @@ def index():
     return render_template("index.html")
 
 @app.route("/nutrien")
-@login_requerido
+
 def nutrien():
     return render_template("nutrien.html")
 
@@ -201,7 +201,7 @@ def gasto():
 
 
 @app.route("/peso")
-@login_requerido
+
 def peso():
     return render_template("peso.html")
 
@@ -264,46 +264,44 @@ def macro():
 
 
 @app.route("/imc")
-@login_requerido
 def imc():
     return render_template("imc.html")
 
-@app.route("/imcc", methods=["GET", "POST"])
+@app.route("/ejer")
+@login_requerido
+def ejer():
+    return render_template("ejer.html")
+
+@app.route("/imcc", methods=["POST"])
 def imcc():
-    resultado_imc = None
-    categoria = None
-    error = None
+    try:
+        peso = float(request.form["peso"])
+        altura = float(request.form["altura"]) / 100 
 
-    if request.method == "POST":
-        try:
-            peso = float(request.form["peso"])
-            altura = float(request.form["altura"])
+        if altura <= 0 or peso <= 0:
+            return render_template("imc.html", error="Valores inválidos")
 
-            if peso <= 0 or altura <= 0:
-                raise ValueError("Los valores deben ser positivos.")
+        imc = round(peso / (altura ** 2), 2)
 
-            altura_m = altura / 100
-            imc = peso / (altura_m ** 2)
-            resultado_imc = f"{imc:.2f}"
+        
+        if imc < 18.5:
+            categoria = "Bajo peso"
+            mensaje = "Estás flaco 👀"
+        elif 18.5 <= imc < 25:
+            categoria = "Peso normal"
+            mensaje = "Tienes un peso saludable 😄"
+        elif 25 <= imc < 30:
+            categoria = "Sobrepeso"
+            mensaje = "Tienes sobrepeso ⚠️"
+        else:
+            categoria = "Obesidad"
+            mensaje = "Cuidado, estás en obesidad 🚨"
 
-            if imc < 18.5:
-                categoria = "Bajo peso"
-            elif 18.5 <= imc < 24.9:
-                categoria = "Normal"
-            elif 25 <= imc < 29.9:
-                categoria = "Sobrepeso"
-            else:
-                categoria = "Obesidad"
+        return render_template("imc.html", imc=imc, categoria=categoria, mensaje=mensaje)
 
-        except Exception as e:
-            error = f"Error: {str(e)}"
+    except:
+        return render_template("imc.html", error="Error en los datos ingresados")
 
-    return render_template(
-        "imc.html",
-        imc=resultado_imc,
-        categoria=categoria,
-        error=error
-    )
 
 
 

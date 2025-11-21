@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block contenido %}
-<div class="text-center mb-5">
-    <h1 class="fw-bold">Todo cuerpo es perfecto</h1>
-</div>
+<div class="container mt-4">
 
-<div class="container" style="max-width: 500px;">
-    <form method="POST" class="p-4 border rounded shadow">
+    <h2 class="text-center mb-4">Todo cuerpo es perfecto</h2>
+
+    <form method="POST" action="" class="p-4 shadow rounded bg-light">
+
         <div class="mb-3">
-            <label class="form-label">Edad</label>
+            <label>Edad:</label>
             <input type="number" class="form-control" name="edad" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Altura (cm)</label>
+            <label>Altura (cm):</label>
             <input type="number" class="form-control" name="altura" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Sexo</label>
+            <label>Sexo:</label>
             <select class="form-select" name="sexo" required>
                 <option value="hombre">Hombre</option>
                 <option value="mujer">Mujer</option>
@@ -29,11 +29,12 @@
     </form>
 
     {% if peso %}
-    <div class="alert alert-success text-center mt-4">
-        <h4>Peso ideal aproximado: {{ peso }} kg</h4>
-        <p>Edad: {{ edad }} años</p>
-    </div>
+        <div class="mt-4 p-4 bg-white rounded shadow">
+            <h4>Resultado</h4>
+            <p><strong>Peso ideal aproximado:</strong> {{ peso }} kg</p>
+            <p><strong>Edad:</strong> {{ edad }} años</p>
+        </div>
     {% endif %}
-</div>
 
+</div>
 {% endblock %}

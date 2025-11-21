@@ -9,7 +9,7 @@ contenido %}
 
     
   </style>
-
+  {% if session.get('usuario') %}
   <div class="col-md-4">
     <div class="card shadow-sm border-0 h-100">
       <img
@@ -29,6 +29,30 @@ contenido %}
       </div>
     </div>
   </div>
+  {% endif %}
+
+{% if session.get('usuario') %}
+<div class="col-md-4">
+  <div class="card shadow-sm border-0 h-100">
+    <img
+      src="static/ingre.jpg"
+      style="height: 200px; object-fit: cover"
+      class="card-img-top"
+      alt="Calculadora Nutricional"
+    />
+    <div class="card-body text-center">
+      <h5 class="card-title fw-bold">Ejercicios Personalizados</h5>
+      <p class="card-text text-muted">
+        ¿Qué ejercicios personalizados quieres realizar hoy?
+      </p>
+      <a href="/ejer" class="btn btn-calcu w-100" style="color: white">
+        Vamos
+      </a>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 
   <style>
     .btn-dieta {
@@ -92,7 +116,7 @@ contenido %}
     </div>
   </div>
 
-
+  {% if session.get('usuario') %}
        <div class="col-md-4">
     <div class="card shadow-sm border-0 h-100">
       <img
@@ -110,6 +134,7 @@ contenido %}
       </div>
     </div>
   </div>
+  {% endif %}
 
   <style>
     .btn-progreso {
