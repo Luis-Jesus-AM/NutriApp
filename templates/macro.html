@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Calculadora de Macronutrientes</h2>
+
+        <form action="/macro" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Calorías diarias</label>
+                <input type="number" name="calorias" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Objetivo</label>
+                <select name="objetivo" class="form-control">
+                    <option value="perdida">Pérdida de peso</option>
+                    <option value="mantenimiento">Mantenimiento</option>
+                    <option value="ganancia">Ganancia muscular</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Calcular</button>
+        </form>
+
+        {% if macros %}
+        <hr>
+        <h4 class="text-center mt-4">Resultados</h4>
+
+        <ul class="list-group">
+            <li class="list-group-item">Proteínas: <strong>{{ macros.proteina }} g</strong></li>
+            <li class="list-group-item">Carbohidratos: <strong>{{ macros.carbohidratos }} g</strong></li>
+            <li class="list-group-item">Grasas: <strong>{{ macros.grasas }} g</strong></li>
+        </ul>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

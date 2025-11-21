@@ -226,13 +226,48 @@ def ideal():
 def ingre():
     return render_template("ingre.html")
 
+@app.route("/macro", methods=["GET", "POST"])
+@login_requerido
+def macro():
+    if request.method == "POST":
+        calorias = int(request.form["calorias"])
+        objetivo = request.form["objetivo"]
+
+        if objetivo == "perdida":
+            p = 0.35
+            c = 0.40
+            g = 0.25
+        elif objetivo == "ganancia":
+            p = 0.30
+            c = 0.50
+            g = 0.20
+        else:
+            p = 0.30
+            c = 0.45
+            g = 0.25
+
+        proteina = round((calorias * p) / 4)
+        carbohidratos = round((calorias * c) / 4)
+        grasas = round((calorias * g) / 9)
+
+        macros = {
+            "proteina": proteina,
+            "carbohidratos": carbohidratos,
+            "grasas": grasas
+        }
+
+        return render_template("macro.html", macros=macros)
+
+    return render_template("macro.html")
+
+
 @app.route("/imc")
 @login_requerido
 def imc():
     return render_template("imc.html")
 
-@app.route("/imc", methods=["GET", "POST"])
-def imc():
+@app.route("/imcc", methods=["GET", "POST"])
+def imcc():
     resultado_imc = None
     categoria = None
     error = None
@@ -261,10 +296,13 @@ def imc():
         except Exception as e:
             error = f"Error: {str(e)}"
 
-    return render_template("imc.html",
-                        imc=resultado_imc,
-                        categoria=categoria,
-                        error=error)
+    return render_template(
+        "imc.html",
+        imc=resultado_imc,
+        categoria=categoria,
+        error=error
+    )
+
 
 
 @app.route("/cerrar-sesion")
