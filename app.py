@@ -4,6 +4,8 @@ app = Flask(__name__)
 app.secret_key = "wey_donde_estoy"
 API_KEY = "a60788476b1c464aa61639e385e8fbed"
 
+##profe las fotos de las card las voy cambiar solo que ya no me dio tiempo ahorita, no piense que lo voy a dejar asi 
+
 def calcular_imc(peso, altura_cm):
     altura_m = altura_cm / 100
     imc = peso / (altura_m ** 2)
