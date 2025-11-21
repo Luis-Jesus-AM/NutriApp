@@ -9,6 +9,8 @@ def calcular_imc(peso, altura_cm):
     imc = peso / (altura_m ** 2)
     return round(imc, 1)
 
+
+
 def categoria_imc(imc):
     if imc < 18.5:
         return "Bajo peso"
