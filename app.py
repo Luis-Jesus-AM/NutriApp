@@ -1,10 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_mysqldb import MySQL
+from werkzeug.security import generate_password_hash
 app = Flask(__name__)
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'user'
 
 app.secret_key = "wey_donde_estoy"
 API_KEY = "a60788476b1c464aa61639e385e8fbed"
 
-##profe las fotos de las card las voy cambiar solo que ya no me dio tiempo ahorita, no piense que lo voy a dejar asi 
 
 def calcular_imc(peso, altura_cm):
     altura_m = altura_cm / 100
