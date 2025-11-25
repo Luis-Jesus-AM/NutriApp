@@ -1,22 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash
+
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'user'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 app.secret_key = "wey_donde_estoy"
 API_KEY = "a60788476b1c464aa61639e385e8fbed"
-
 
 def calcular_imc(peso, altura_cm):
     altura_m = altura_cm / 100
     imc = peso / (altura_m ** 2)
     return round(imc, 1)
-
 
 
 def categoria_imc(imc):
@@ -28,8 +28,6 @@ def categoria_imc(imc):
         return "Sobrepeso"
     else:
         return "Obesidad"
-
-
 
 
 def calcular_tmb(peso, altura, edad, genero):
@@ -74,10 +72,8 @@ def index():
     return render_template("index.html")
 
 @app.route("/nutrien")
-
 def nutrien():
     return render_template("nutrien.html")
-
 
 
 @app.route('/calculadora', methods=['GET', 'POST'])
@@ -132,7 +128,6 @@ def calculadora_tmb_get():
     return render_template('nutrien.html', **contexto)
 
 
-
 @app.route("/perfil")
 def perfil():
     return render_template("perfil.html")
@@ -152,7 +147,6 @@ def iniciar_sesion():
             return redirect(url_for("index"))
 
     return "Usuario o contraseña incorrectos"
-
 
 
 @app.route("/registros")
@@ -209,7 +203,6 @@ def gasto():
 
 
 @app.route("/peso")
-
 def peso():
     return render_template("peso.html")
 
@@ -309,8 +302,6 @@ def imcc():
 
     except:
         return render_template("imc.html", error="Error en los datos ingresados")
-
-
 
 
 @app.route("/cerrar-sesion")
