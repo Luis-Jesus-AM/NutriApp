@@ -60,13 +60,7 @@ def login_requerido(ruta):
     wrapper.__name__ = ruta.__name__
     return wrapper
 
-usuarios = [
-    {
-        "nombre": "luis",
-        "email": "23308060610060@cetis61.edu.mx",
-        "contraseña": "123456"
-    }
-]
+
 
 @app.route("/")
 def index():
@@ -144,7 +138,7 @@ def iniciar_sesion():
 
     cur = mysql.connection.cursor()
 
-    # Buscar usuario por email
+    
     cur.execute("SELECT * FROM userrs WHERE email = %s", (email,))
     usuario = cur.fetchone()
     cur.close()
@@ -152,9 +146,9 @@ def iniciar_sesion():
     if usuario is None:
         return "Usuario no encontrado"
 
-    # usuario[3] = contraseña en tu tabla
+    
     if usuario[3] == password:
-        session["usuario"] = usuario[2]   # Guardamos el email en sesión
+        session["usuario"] = usuario[2]   
         return redirect(url_for("index"))
     else:
         return "Contraseña incorrecta"
@@ -331,9 +325,9 @@ def registrar():
 
     cur = mysql.connection.cursor()
 
-    # Insertar usuario
+   
     cur.execute("""
-        INSERT INTO userrs (nombre, email, contraseña)
+        INSERT INTO userrs (nombre, email, password)
         VALUES (%s, %s, %s)
     """, (nombre, email, password))
 
