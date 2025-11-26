@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'Foodfit'
+app.config['MYSQL_DB'] = 'users'
 
 
 mysql = MySQL(app)
@@ -133,25 +133,24 @@ def sesion():
 
 @app.route("/iniciar-sesion", methods=["POST"])
 def iniciar_sesion():
-    email = request.form.get("email")
+    correo = request.form.get("correo")
     password = request.form.get("password")
 
     cur = mysql.connection.cursor()
-
-    
-    cur.execute("SELECT * FROM userrs WHERE email = %s", (email,))
+    cur.execute("SELECT * FROM userrs WHERE correo = %s", (correo,))
     usuario = cur.fetchone()
     cur.close()
 
     if usuario is None:
         return "Usuario no encontrado"
 
-    
-    if usuario[3] == password:
-        session["usuario"] = usuario[2]   
+    # PASSWORD ESTÁ EN usuario[5]
+    if usuario[5] == password:
+        session["usuario"] = usuario[1]  # guarda el nombre del usuario
         return redirect(url_for("index"))
     else:
         return "Contraseña incorrecta"
+
 
 
 
@@ -327,7 +326,7 @@ def registrar():
 
    
     cur.execute("""
-        INSERT INTO userrs (nombre, email, password)
+        INSERT INTO userrs (nombre, correo, password)
         VALUES (%s, %s, %s)
     """, (nombre, email, password))
 
