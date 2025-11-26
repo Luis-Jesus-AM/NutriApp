@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, flash, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash
 
@@ -7,9 +7,10 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'user'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config['MYSQL_DB'] = 'Foodfit'
 
+
+mysql = MySQL(app)
 app.secret_key = "wey_donde_estoy"
 API_KEY = "a60788476b1c464aa61639e385e8fbed"
 
@@ -138,15 +139,27 @@ def sesion():
 
 @app.route("/iniciar-sesion", methods=["POST"])
 def iniciar_sesion():
-    email = request.form["email"]
-    contraseña = request.form["contraseña"]
+    email = request.form.get("email")
+    password = request.form.get("password")
 
-    for u in usuarios:
-        if u["email"] == email and u["contraseña"] == contraseña:
-            session["usuario"] = email   
-            return redirect(url_for("index"))
+    cur = mysql.connection.cursor()
 
-    return "Usuario o contraseña incorrectos"
+    # Buscar usuario por email
+    cur.execute("SELECT * FROM userrs WHERE email = %s", (email,))
+    usuario = cur.fetchone()
+    cur.close()
+
+    if usuario is None:
+        return "Usuario no encontrado"
+
+    # usuario[3] = contraseña en tu tabla
+    if usuario[3] == password:
+        session["usuario"] = usuario[2]   # Guardamos el email en sesión
+        return redirect(url_for("index"))
+    else:
+        return "Contraseña incorrecta"
+
+
 
 
 @app.route("/registros")
@@ -312,20 +325,23 @@ def cerrar_sesion():
 
 @app.route("/registrar", methods=["POST"])
 def registrar():
-    nombre = request.form["nombre"]
-    email = request.form["email"]
-    contraseña = request.form["contraseña"]
+    nombre = request.form.get("nombre")
+    email = request.form.get("email")
+    password = request.form.get("password")
 
-    usuario = {
-        "nombre": nombre,
-        "email": email,
-        "contraseña": contraseña
-    }
+    cur = mysql.connection.cursor()
 
-    usuarios.append(usuario)
-    print(usuarios)
+    # Insertar usuario
+    cur.execute("""
+        INSERT INTO userrs (nombre, email, contraseña)
+        VALUES (%s, %s, %s)
+    """, (nombre, email, password))
+
+    mysql.connection.commit()
+    cur.close()
 
     return redirect(url_for("index"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
