@@ -1,32 +1,53 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block contenido %}
 
-<div class="container py-5 text-center">
-  <h1 class="fw-bold mb-5">Bienvenido a tu Perfil</h1>
+<div class="container py-5">
 
-  <div class="row align-items-center justify-content-center">
+  <div class="card shadow-lg mx-auto p-4" style="max-width: 800px; border-radius: 20px;">
 
-    <div class="col-md-6">
-      <div class="card mx-auto shadow-lg" style="max-width: 18rem;">
-        <img src="static/perfil.jpg" class="card-img-top rounded-circle border border-2 border-light" alt="Foto de perfil">
-        <div class="card-body">
-          <p class="card-text text-muted">23308060610060@cetis61.edu.mx</p>
+    <h1 class="fw-bold text-center mb-4">Tu Perfil</h1>
+
+    <div class="row align-items-center">
+
+      <div class="col-md-4 text-center mb-4">
+        <div class="rounded-circle mx-auto d-flex justify-content-center align-items-center shadow"
+             style="width: 150px; height: 150px; background-color: #0d6efd; color: white;
+                    font-size: 60px; font-weight: bold;">
+          {{ inicial }}
         </div>
+
+        <p class="text-muted mt-3">{{ correo }}</p>
+      </div>
+
+      <!-- Datos -->
+      <div class="col-md-8">
+        <h4 class="fw-bold mb-3">Datos Personales</h4>
+
+        <div class="p-3 bg-light rounded shadow-sm">
+
+          <p class="mb-2">
+            <strong>Nombre:</strong><br>
+            {{ nombre }}
+          </p>
+
+          <p class="mb-2">
+            <strong>Correo:</strong><br>
+            {{ correo }}
+          </p>
+
+          <p class="mb-2">
+            <strong>Contraseña:</strong><br>
+            ********
+          </p>
+
+        </div>
+
+        <a href="/perfil" class="btn btn-primary px-4 mt-3">Editar perfil</a>
       </div>
     </div>
-<!--profe esto todavia no esta bien jaja -->
-    <div class="col-md-6">
-      <h2 class="fw-bold mb-4">Perfil</h2>
-      <p class="fs-5 text-start">
-        <strong>Datos Personales:</strong><br>
-        Nombre: Luis<br>
-        Correo: 233080*******************mx<br>
-        Contraseña: ******* 
-      </p>
-      <a href="/perfil" class="btn btn-primary px-4 mt-3">Editar</a>
-    </div>
+
   </div>
+
 </div>
 
 {% endblock %}
-

@@ -35,7 +35,7 @@ contenido %}
 <div class="col-md-4">
   <div class="card shadow-sm border-0 h-100">
     <img
-      src="static/ingre.jpg"
+      src="static/persona.webp"
       style="height: 200px; object-fit: cover"
       class="card-img-top"
       alt="Calculadora Nutricional"
@@ -120,7 +120,7 @@ contenido %}
        <div class="col-md-4">
     <div class="card shadow-sm border-0 h-100">
       <img
-        src="static/imc.webp"
+        src="static/macroooo.jpg"
         style="height: 200px; object-fit: cover"
         class="card-img-top"
         alt="Planes de Dieta"
@@ -161,36 +161,22 @@ contenido %}
     </div>
   </div>
 
-  <div class="container py-5">
+{% if not session.get('usuario') %}
+
+<div class="container py-5">
     <div class="row align-items-center">
+
       <div class="col-md-6">
-        <div
-          id="carouselExampleSlidesOnly"
-          class="carousel slide"
-          data-bs-ride="carousel"
-          data-bs-interval="2000"
-        >
+        <div id="carouselInvitado" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                src="static/carrusel1.jpg"
-                class="d-block w-100"
-                style="height: 350px; object-fit: cover"
-              />
+              <img src="static/carrusel1.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
             </div>
             <div class="carousel-item">
-              <img
-                src="static/carrusel2.jpg"
-                class="d-block w-100"
-                style="height: 350px; object-fit: cover"
-              />
+              <img src="static/carrusel2.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
             </div>
             <div class="carousel-item">
-              <img
-                src="static/carrusel3.jpg"
-                class="d-block w-100"
-                style="height: 350px; object-fit: cover"
-              />
+              <img src="static/carrusel3.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
             </div>
           </div>
         </div>
@@ -201,12 +187,47 @@ contenido %}
         <p class="fs-5">
           En FoodFit queremos que te sientas en casa. Aquí cuidar de ti es
           fácil, cómodo y pensado para tu estilo de vida. Únete y descubre lo
-          bien que se siente empezar
+          bien que se siente empezar.
         </p>
         <a href="/iniciar" class="btn btn-primary px-4 mt-3">Comenzar</a>
       </div>
+
     </div>
-  </div>
+</div>
+
+{% else %}
+
+<div class="container py-5">
+    <div class="row align-items-center">
+
+      <div class="col-md-6">
+        <div id="carouselInvitado" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="static/ej1.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
+            </div>
+            <div class="carousel-item">
+              <img src="static/ej2.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
+            </div>
+            <div class="carousel-item">
+              <img src="static/ej3.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-center">
+        <h2 class="fw-bold mb-4">Tu Proceso es Único🌱 </h2>
+        <p class="fs-5">
+        El progreso no es lineal. Sé paciente contigo mismo y celebra cada pequeño avance. ¡Sigue adelante!
+        </p>
+      </div>
+
+    </div>
+</div>
+{% endif %}
+
+
 </div>
 
 {% endblock %}

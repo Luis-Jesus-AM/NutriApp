@@ -124,8 +124,24 @@ def calculadora_tmb_get():
 
 
 @app.route("/perfil")
+@login_requerido
 def perfil():
-    return render_template("perfil.html")
+    usuario_id = session.get("id")   
+
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT nombre, correo FROM userrs WHERE id = %s", (usuario_id,))
+    usuario = cur.fetchone()
+    cur.close()
+
+    if usuario is None:
+        return "Usuario no encontrado"
+
+    nombre = usuario[0]
+    correo = usuario[1]
+    inicial = correo[0].upper() 
+
+    return render_template("perfil.html", nombre=nombre, correo=correo, inicial=inicial)
+
 
 @app.route("/sesion")
 def sesion():
@@ -144,9 +160,9 @@ def iniciar_sesion():
     if usuario is None:
         return "Usuario no encontrado"
 
-    # PASSWORD ESTÁ EN usuario[5]
+
     if usuario[5] == password:
-        session["usuario"] = usuario[1]  # guarda el nombre del usuario
+        session["usuario"] = usuario[1]  
         return redirect(url_for("index"))
     else:
         return "Contraseña incorrecta"
@@ -318,11 +334,14 @@ def cerrar_sesion():
 
 @app.route("/registrar", methods=["POST"])
 def registrar():
+    
+    
     nombre = request.form.get("nombre")
     email = request.form.get("email")
     password = request.form.get("password")
 
     cur = mysql.connection.cursor()
+
 
    
     cur.execute("""
@@ -331,6 +350,7 @@ def registrar():
     """, (nombre, email, password))
 
     mysql.connection.commit()
+
     cur.close()
 
     return redirect(url_for("index"))
