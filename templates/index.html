@@ -1,196 +1,152 @@
-{% extends "base.html" %} {% block title %}Inicio{% endblock %} {% block
-contenido %}
+{% extends "base.html" %}
+{% block title %}Inicio{% endblock %}
+{% block contenido %}
 
-<div class="row g-5">
-  <style>
-          .btn-calcu {
-              background-color: #2072B1 
-          }
+<div class="container py-5">
 
-    
-  </style>
-  {% if session.get('usuario') %}
-  <div class="col-md-4">
-    <div class="card shadow-sm border-0 h-100">
-      <img
-        src="static/ingre.jpg"
-        style="height: 200px; object-fit: cover"
-        class="card-img-top"
-        alt="Calculadora Nutricional"
-      />
-      <div class="card-body text-center">
-        <h5 class="card-title fw-bold">Buscar recetas por ingredientes</h5>
-        <p class="card-text text-muted">
-          que ingredientes tenemos, listo para cocinar?
+    {% if not session.get('usuario') %}
+    <!-- ================================================= -->
+    <!--        INFORMACIÓN PARA INVITADOS (NO LOG)        -->
+    <!-- ================================================= -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-primary">Bienvenido a FoodFit</h1>
+        <p class="fs-5 text-muted">
+            Tu portal para iniciar una vida más saludable. Empieza hoy.
         </p>
-        <a href="/recetario" class="btn btn-calcu w-100" style="color: white"
-          >Vamos</a
-        >
-      </div>
     </div>
-  </div>
-  {% endif %}
 
-{% if session.get('usuario') %}
-<div class="col-md-4">
-  <div class="card shadow-sm border-0 h-100">
-    <img
-      src="static/persona.webp"
-      style="height: 200px; object-fit: cover"
-      class="card-img-top"
-      alt="Calculadora Nutricional"
-    />
-    <div class="card-body text-center">
-      <h5 class="card-title fw-bold">Ejercicios Personalizados</h5>
-      <p class="card-text text-muted">
-        ¿Qué ejercicios personalizados quieres realizar hoy?
-      </p>
-      <a href="/ejer" class="btn btn-calcu w-100" style="color: white">
-        Vamos
-      </a>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="p-4 bg-white shadow rounded">
+                <h4 class="fw-bold text-primary">🥗 ¿Qué es FoodFit?</h4>
+                <p class="text-muted">
+                    FoodFit es una herramienta gratuita donde puedes calcular tu IMC, tu peso ideal,
+                    tu gasto calórico y mucho más. Está diseñada para ayudarte a entender mejor tu salud.
+                </p>
+                <p class="text-muted">Únete para desbloquear funciones avanzadas como:</p>
+                <ul>
+                    <li>Rutinas de ejercicios personalizadas</li>
+                    <li>Recetas según tus ingredientes</li>
+                    <li>Cálculo de macronutrientes</li>
+                    <li>Seguimiento de tus progresos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="p-4 bg-white shadow rounded">
+                <h4 class="fw-bold text-primary">🌱 Beneficios de empezar hoy</h4>
+                <ul>
+                    <li>Conocer tu estado físico actual</li>
+                    <li>Cambiar tu alimentación según tus necesidades</li>
+                    <li>Sentirte mejor contigo mismo</li>
+                    <li>Evitar enfermedades crónicas a futuro</li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
+
+    {% else %}
+    <!-- ================================================= -->
+    <!--           INFORMACIÓN PARA USUARIOS LOG           -->
+    <!-- ================================================= -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold text-primary">¡Hola de nuevo! 🌟</h1>
+        <p class="fs-5 text-muted">
+            Continúa tu camino hacia una mejor versión de ti. Ya tienes acceso a todas las herramientas.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-6">
+            <div class="p-4 bg-white shadow rounded">
+                <h4 class="fw-bold text-primary">🏃‍♂️ Tus Herramientas Disponibles</h4>
+                <ul>
+                    <li>Ejercicios personalizados según tus objetivos</li>
+                    <li>Recetas por ingredientes</li>
+                    <li>Seguimiento de tus macronutrientes</li>
+                    <li>Calculadoras avanzadas de salud</li>
+                </ul>
+                <p class="text-muted">
+                    Recuerda que cada cálculo y recomendación es para ayudarte a progresar de forma segura.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="p-4 bg-white shadow rounded">
+                <h4 class="fw-bold text-primary">🔥 Mantén la motivación</h4>
+                <p class="text-muted">
+                    La constancia es la clave. No importa si el cambio es pequeño, lo importante
+                    es seguir avanzando cada día.
+                </p>
+                <ul>
+                    <li>Puedes registrar tus rutinas de ejercicios</li>
+                    <li>Evalúa tus resultados cada semana</li>
+                    <li>Genera hábitos saludables con facilidad</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+
+
+    <!-- ================================================= -->
+    <!--                  VIDEO MOTIVACIONAL               -->
+    <!-- ================================================= -->
+    <div class="mt-5 text-center">
+        <h2 class="fw-bold mb-3 text-primary">🎥 La importancia de comer sano</h2>
+        <p class="text-muted mb-4">
+            Cuidar tu alimentación no solo mejora tu cuerpo, también mejora tu mente, energía y calidad de vida.
+        </p>
+
+        <div class="ratio ratio-16x9 shadow rounded mx-auto" style="max-width: 800px;">
+            <iframe 
+                src="https://www.youtube.com/embed/1U5X1F4dfW0" 
+                title="La importancia de comer sano"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
 </div>
-{% endif %}
-
-
-  <style>
-    .btn-dieta {
-      background-color: #2072b1 ;
-    }
-  </style>
-  <div class="col-md-4">
-    <div class="card shadow-sm border-0 h-100">
-      <img
-        src="static/comida.jpg"
-        style="height: 200px; object-fit: cover"
-        class="card-img-top"
-        alt="Planes de Dieta"
-      />
-      <div class="card-body text-center">
-        <h5 class="card-title fw-bold">   Calculadora de Tasa Metabólica Basal (TMB)</h5>
-        <p class="card-text text-muted">Tu metabolismo basal (MB) es una de las tres formas en que tu cuerpo utiliza las calorías.</p>
-        <a href="/nutrien" class="btn btn-dieta w-100" style="color: white"
-          >Vamos</a
-        >
-      </div>
-    </div>
-  </div>
-
-
-    <div class="col-md-4">
-    <div class="card shadow-sm border-0 h-100">
-      <img
-        src="static/peso.webp"
-        style="height: 200px; object-fit: cover"
-        class="card-img-top"
-        alt="Planes de Dieta"
-      />
-      <div class="card-body text-center">
-        <h5 class="card-title fw-bold">Calculadora de Peso Corporal Ideal</h5>
-        <p class="card-text text-muted">Alcanza y mantén tu peso ideal</p>
-        <a href="/peso" class="btn btn-dieta w-100" style="color: white"
-          >Vamos</a
-        >
-      </div>
-    </div>
-  </div>
 
 
 
-     <div class="col-md-4">
-    <div class="card shadow-sm border-0 h-100">
-      <img
-        src="static/imc.webp"
-        style="height: 200px; object-fit: cover"
-        class="card-img-top"
-        alt="Planes de Dieta"
-      />
-      <div class="card-body text-center">
-        <h5 class="card-title fw-bold">   Calculadora de Índice de Masa Corporal (IMC).</h5>
-        <p class="card-text text-muted">El índice de masa corporal (IMC) es una medida ampliamente utilizada en la Medicina para evaluar la adecuación del peso corporal de una persona en relación con su altura</p>
-        <a href="/imc" class="btn btn-dieta w-100" style="color: white"
-          >Vamos</a
-        >
-      </div>
-    </div>
-  </div>
-
-  {% if session.get('usuario') %}
-       <div class="col-md-4">
-    <div class="card shadow-sm border-0 h-100">
-      <img
-        src="static/macroooo.jpg"
-        style="height: 200px; object-fit: cover"
-        class="card-img-top"
-        alt="Planes de Dieta"
-      />
-      <div class="card-body text-center">
-        <h5 class="card-title fw-bold"> Calculadora de Macronutrientes</h5>
-        <p class="card-text text-muted">Esta calculadora puede proporcionar un rango de valores sugeridos para las necesidades de macronutrientes y calorías de una persona en condiciones normales.</p>
-        <a href="/macro" class="btn btn-dieta w-100" style="color: white"
-          >Vamos</a
-        >
-      </div>
-    </div>
-  </div>
-  {% endif %}
-
-  <style>
-    .btn-progreso {
-      background-color: #2072b1 ;
-    }
-  </style>
-  <div class="col-md-4">
-    <div class="card shadow-sm border-0 h-100">
-      <img
-        src="static/nuto.jpg"
-        style="height: 200px; object-fit: cover"
-        class="card-img-top"
-        alt="Progreso"
-      />
-      <div class="card-body text-center">
-        <h5 class="card-title fw-bold">Calculadora de gasto calorico</h5>
-        <p class="card-text text-muted">
-          cuales son los nutrientes de esta comida?
-        </p>
-        <a href="/gasto" class="btn btn-progreso w-100" style="color: white"
-          >Vamos</a
-        >
-      </div>
-    </div>
-  </div>
+<!-- ===================================================== -->
+<!-- CARRUSEL DEL FINAL (SEGÚN SI HAY SESIÓN O NO)         -->
+<!-- ===================================================== -->
 
 {% if not session.get('usuario') %}
-
 <div class="container py-5">
     <div class="row align-items-center">
 
-      <div class="col-md-6">
-        <div id="carouselInvitado" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="static/carrusel1.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
+        <div class="col-md-6">
+            <div id="carouselInvitado" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="static/carrusel1.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="static/carrusel2.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="static/carrusel3.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;">
+                    </div>
+                </div>
             </div>
-            <div class="carousel-item">
-              <img src="static/carrusel2.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
-            </div>
-            <div class="carousel-item">
-              <img src="static/carrusel3.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div class="col-md-6 text-center">
-        <h2 class="fw-bold mb-4">Solo lo mejor para ti</h2>
-        <p class="fs-5">
-          En FoodFit queremos que te sientas en casa. Aquí cuidar de ti es
-          fácil, cómodo y pensado para tu estilo de vida. Únete y descubre lo
-          bien que se siente empezar.
-        </p>
-        <a href="/iniciar" class="btn btn-primary px-4 mt-3">Comenzar</a>
-      </div>
+        <div class="col-md-6 text-center">
+            <h2 class="fw-bold mb-4">Solo lo mejor para ti</h2>
+            <p class="fs-5">
+                En FoodFit queremos que te sientas en casa. Aquí cuidar de ti es fácil.
+                Únete y descubre lo bien que se siente empezar.
+            </p>
+            <a href="/iniciar" class="btn btn-primary px-4 mt-3">Comenzar</a>
+        </div>
 
     </div>
 </div>
@@ -200,34 +156,32 @@ contenido %}
 <div class="container py-5">
     <div class="row align-items-center">
 
-      <div class="col-md-6">
-        <div id="carouselInvitado" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="static/ej1.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
+        <div class="col-md-6">
+            <div id="carouselUsuario" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="static/ej1.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="static/ej2.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="static/ej3.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;">
+                    </div>
+                </div>
             </div>
-            <div class="carousel-item">
-              <img src="static/ej2.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
-            </div>
-            <div class="carousel-item">
-              <img src="static/ej3.jpg" class="d-block w-100" style="height: 350px; object-fit: cover">
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div class="col-md-6 text-center">
-        <h2 class="fw-bold mb-4">Tu Proceso es Único🌱 </h2>
-        <p class="fs-5">
-        El progreso no es lineal. Sé paciente contigo mismo y celebra cada pequeño avance. ¡Sigue adelante!
-        </p>
-      </div>
+        <div class="col-md-6 text-center">
+            <h2 class="fw-bold mb-4">Tu Proceso es Único 🌱</h2>
+            <p class="fs-5">
+                Sé constante, celebra tus avances y sigue creciendo cada día.
+            </p>
+        </div>
 
     </div>
 </div>
+
 {% endif %}
-
-
-</div>
 
 {% endblock %}

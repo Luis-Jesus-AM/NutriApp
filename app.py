@@ -266,7 +266,7 @@ def recetario():
         try:
             params = {
                 "apiKey": API_KEY,
-                "query": ingredient_name,  # <-- AQUÍ USAMOS QUERY
+                "query": ingredient_name, 
                 "number": 12,
                 "addRecipeInformation": True
             }

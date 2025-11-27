@@ -15,7 +15,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark shadow">
+<nav class="navbar navbar-expand-lg navbar-dark shadow" style="background-color: #19598A;">
     <div class="container">
         
         <a class="navbar-brand fw-bold" href="/">🥗 FoodFit</a>
@@ -27,36 +27,56 @@
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav ms-auto">
 
-                {% if "usuario" in session %}
                 
-                
-                <li class="nav-item">
-                    <a class="nav-link active" href="/perfil">perfil</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Calculadoras
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/gasto">Gasto calórico</a></li>
+                        <li><a class="dropdown-item" href="/nutrien">Tasa Metabólica Basal</a></li>
+                        <li><a class="dropdown-item" href="/peso">Peso ideal</a></li>
+                        <li><a class="dropdown-item" href="/imc">IMC</a></li>
+
+                        {% if session.get('usuario') %}
+                        <li><a class="dropdown-item" href="/macro">Macronutrientes</a></li>
+                        {% endif %}
+                    </ul>
                 </li>
 
+                {% if session.get('usuario') %}
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Herramientas
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/recetario">Recetas por ingredientes</a></li>
+                        <li><a class="dropdown-item" href="/ejer">Ejercicios personalizados</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="/perfil">👤 Perfil</a>
+                </li>
+
+                
                 <li class="nav-item">
                     <a class="nav-link text-danger fw-bold" href="/cerrar-sesion">Cerrar sesión</a>
                 </li>
 
-                
-
                 {% else %}
-
                 
-                <li class="nav-item">
-                    <a class="nav-link active" href="/sesion">Iniciar sesión</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" href="/registros">Registrarse</a>
-                </li>
-
+                <li class="nav-item"><a class="nav-link" href="/sesion">Iniciar sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="/registros">Registrarse</a></li>
                 {% endif %}
 
             </ul>
         </div>
     </div>
 </nav>
+
+
 
 
 
