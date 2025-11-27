@@ -1,6 +1,7 @@
 from flask import Flask, flash, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 from werkzeug.security import generate_password_hash
+import requests
 
 app = Flask(__name__)
 
@@ -12,7 +13,11 @@ app.config['MYSQL_DB'] = 'users'
 
 mysql = MySQL(app)
 app.secret_key = "wey_donde_estoy"
-API_KEY = "a60788476b1c464aa61639e385e8fbed"
+API_KEY = "f6b36cb84f3b46fab7d19b28bcb4c681"
+BASE_URL = "https://api.spoonacular.com/recipes/complexSearch"
+INGREDIENT_SEARCH_URL = "https://api.spoonacular.com/food/ingredients/search"
+INGREDIENT_INFO_URL = "https://api.spoonacular.com/food/ingredients/{id}/information"
+
 
 def calcular_imc(peso, altura_cm):
     altura_m = altura_cm / 100
@@ -246,10 +251,71 @@ def ideal():
     return render_template("peso.html", peso=peso, edad=edad)
 
 
-@app.route("/ingre")
-@login_requerido
-def ingre():
-    return render_template("ingre.html")
+@app.route("/recetario", methods=["GET", "POST"])
+def recetario():
+    nutrients = None
+    ingredient_name = None
+
+    if request.method == "POST":
+        ingredient_name = request.form.get("ingredient", "").strip()
+
+        if not ingredient_name:
+            flash("Ingresa un ingrediente válido.", "error")
+            return redirect(url_for("recetario"))
+
+        try:
+            # 1️⃣ Buscar ingrediente por nombre (USAMOS VARIABLE GLOBAL)
+            params = {
+                "apiKey": API_KEY,
+                "query": ingredient_name,
+                "number": 1
+            }
+
+            search_res = requests.get(INGREDIENT_SEARCH_URL, params=params)
+
+            if search_res.status_code != 200:
+                flash("Error al conectar con la API.", "error")
+                return redirect(url_for("recetario"))
+
+            results = search_res.json().get("results", [])
+            if not results:
+                flash("Ingrediente no encontrado.", "error")
+                return redirect(url_for("recetario"))
+
+            ingredient_id = results[0]["id"]
+
+            # 2️⃣ Obtener información + nutrientes (USAMOS VARIABLE GLOBAL)
+            info_url = INGREDIENT_INFO_URL.format(id=ingredient_id)
+
+            params = {
+                "apiKey": API_KEY,
+                "amount": 100,
+                "unit": "g"
+            }
+
+            info_res = requests.get(info_url, params=params)
+
+            if info_res.status_code != 200:
+                flash("No se pudieron obtener los nutrientes.", "error")
+                return redirect(url_for("recetario"))
+
+            info_data = info_res.json()
+            nutrients = info_data.get("nutrition", {}).get("nutrients", [])
+
+            return render_template(
+                "recetario.html",
+                nutrients=nutrients,
+                ingredient_name=ingredient_name
+            )
+
+        except Exception as e:
+            flash(f"Error: {e}", "error")
+            return redirect(url_for("recetario"))
+
+    return render_template("recetario.html", nutrients=None, ingredient_name=None)
+
+
+
 
 @app.route("/macro", methods=["GET", "POST"])
 @login_requerido
