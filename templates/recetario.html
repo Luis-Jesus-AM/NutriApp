@@ -7,37 +7,37 @@
 
 <div class="container mt-4">
 
-    <h2 class="text-center mb-4">Buscar nutrientes por ingrediente</h2>
+    <h2 class="text-center mb-4">Buscar recetas por ingrediente</h2>
 
     <form method="POST" class="p-4 shadow rounded bg-light mb-4">
         <label>Ingrediente:</label>
-        <input type="text" class="form-control" name="ingredient" placeholder="Ejemplo: manzana, pollo, arroz">
-        <button class="btn btn-primary mt-3">Buscar nutrientes</button>
+        <input type="text" class="form-control" name="ingredient" placeholder="Ejemplo: pollo, tomate, arroz">
+        <button class="btn btn-primary mt-3">Buscar recetas</button>
     </form>
 
-    {% if nutrients %}
-    <!-- Tarjeta con los resultados -->
-    <div class="card shadow-lg mx-auto" style="max-width: 800px; border-radius: 15px;">
-        <div class="card-header bg-primary text-white text-center" style="border-radius: 15px 15px 0 0;">
-            <h3 class="fw-bold mb-0">Nutrientes por 100 g de {{ ingredient_name }}</h3>
-        </div>
+    {% if recipes %}
+    <h3 class="text-center mb-4">Recetas encontradas con "{{ ingredient_name }}"</h3>
 
-        <div class="card-body p-4">
+    <div class="row">
+        {% for r in recipes %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg" style="border-radius: 15px;">
+                <img src="{{ r.image }}" class="card-img-top" style="border-radius: 15px 15px 0 0;">
 
-            <!-- Lista de nutrientes -->
-            <div class="list-group">
-                {% for n in nutrients %}
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <strong>{{ n.name }}</strong>
-                    <span>{{ n.amount }} {{ n.unit }}</span>
+                <div class="card-body text-center">
+                    <h5 class="fw-bold">{{ r.title }}</h5>
+
+                    <a class="btn btn-success mt-3" 
+                       href="https://spoonacular.com/recipes/{{ r.title|replace(' ', '-') }}-{{ r.id }}"
+                       target="_blank">
+                       Ver receta 🔗
+                    </a>
                 </div>
-                {% endfor %}
             </div>
-
         </div>
+        {% endfor %}
     </div>
     {% endif %}
 
 </div>
-
 {% endblock %}

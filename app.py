@@ -13,10 +13,10 @@ app.config['MYSQL_DB'] = 'users'
 
 mysql = MySQL(app)
 app.secret_key = "wey_donde_estoy"
+
 API_KEY = "f6b36cb84f3b46fab7d19b28bcb4c681"
 BASE_URL = "https://api.spoonacular.com/recipes/complexSearch"
-INGREDIENT_SEARCH_URL = "https://api.spoonacular.com/food/ingredients/search"
-INGREDIENT_INFO_URL = "https://api.spoonacular.com/food/ingredients/{id}/information"
+
 
 
 def calcular_imc(peso, altura_cm):
@@ -253,7 +253,7 @@ def ideal():
 
 @app.route("/recetario", methods=["GET", "POST"])
 def recetario():
-    nutrients = None
+    recipes = None
     ingredient_name = None
 
     if request.method == "POST":
@@ -264,47 +264,25 @@ def recetario():
             return redirect(url_for("recetario"))
 
         try:
-            # 1️⃣ Buscar ingrediente por nombre (USAMOS VARIABLE GLOBAL)
             params = {
                 "apiKey": API_KEY,
-                "query": ingredient_name,
-                "number": 1
+                "query": ingredient_name,  # <-- AQUÍ USAMOS QUERY
+                "number": 12,
+                "addRecipeInformation": True
             }
 
-            search_res = requests.get(INGREDIENT_SEARCH_URL, params=params)
+            response = requests.get(BASE_URL, params=params)
 
-            if search_res.status_code != 200:
+            if response.status_code != 200:
                 flash("Error al conectar con la API.", "error")
                 return redirect(url_for("recetario"))
 
-            results = search_res.json().get("results", [])
-            if not results:
-                flash("Ingrediente no encontrado.", "error")
-                return redirect(url_for("recetario"))
-
-            ingredient_id = results[0]["id"]
-
-            # 2️⃣ Obtener información + nutrientes (USAMOS VARIABLE GLOBAL)
-            info_url = INGREDIENT_INFO_URL.format(id=ingredient_id)
-
-            params = {
-                "apiKey": API_KEY,
-                "amount": 100,
-                "unit": "g"
-            }
-
-            info_res = requests.get(info_url, params=params)
-
-            if info_res.status_code != 200:
-                flash("No se pudieron obtener los nutrientes.", "error")
-                return redirect(url_for("recetario"))
-
-            info_data = info_res.json()
-            nutrients = info_data.get("nutrition", {}).get("nutrients", [])
+            data = response.json()
+            recipes = data.get("results", [])
 
             return render_template(
                 "recetario.html",
-                nutrients=nutrients,
+                recipes=recipes,
                 ingredient_name=ingredient_name
             )
 
@@ -312,7 +290,8 @@ def recetario():
             flash(f"Error: {e}", "error")
             return redirect(url_for("recetario"))
 
-    return render_template("recetario.html", nutrients=None, ingredient_name=None)
+    return render_template("recetario.html", recipes=None, ingredient_name=None)
+
 
 
 
