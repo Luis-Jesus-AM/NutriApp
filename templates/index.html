@@ -2,12 +2,9 @@
 {% block title %}Inicio{% endblock %}
 {% block contenido %}
 
-<div class="container py-5">
+<div class="container ">
 
     {% if not session.get('usuario') %}
-    <!-- ================================================= -->
-    <!--        INFORMACIÓN PARA INVITADOS (NO LOG)        -->
-    <!-- ================================================= -->
     <div class="text-center mb-4">
         <h1 class="fw-bold text-primary">Bienvenido a FoodFit</h1>
         <p class="fs-5 text-muted">
@@ -28,7 +25,7 @@
                     <li>Rutinas de ejercicios personalizadas</li>
                     <li>Recetas según tus ingredientes</li>
                     <li>Cálculo de macronutrientes</li>
-                    <li>Seguimiento de tus progresos</li>
+                    
                 </ul>
             </div>
         </div>
@@ -47,11 +44,9 @@
     </div>
 
     {% else %}
-    <!-- ================================================= -->
-    <!--           INFORMACIÓN PARA USUARIOS LOG           -->
-    <!-- ================================================= -->
+
     <div class="text-center mb-4">
-        <h1 class="fw-bold text-primary">¡Hola de nuevo! 🌟</h1>
+        <h1 class="fw-bold text-primary">¡Hola de nuevo, {{ session['usuario'] }}! 🌟</h1>
         <p class="fs-5 text-muted">
             Continúa tu camino hacia una mejor versión de ti. Ya tienes acceso a todas las herramientas.
         </p>
@@ -93,38 +88,35 @@
     {% endif %}
 
 
-    <!-- ================================================= -->
-    <!--                  VIDEO MOTIVACIONAL               -->
-    <!-- ================================================= -->
+    
     <div class="mt-5 text-center">
         <h2 class="fw-bold mb-3 text-primary">🎥 La importancia de comer sano</h2>
         <p class="text-muted mb-4">
             Cuidar tu alimentación no solo mejora tu cuerpo, también mejora tu mente, energía y calidad de vida.
         </p>
 
-        <div class="ratio ratio-16x9 shadow rounded mx-auto" style="max-width: 800px;">
-            <iframe 
-                src="https://www.youtube.com/embed/1U5X1F4dfW0" 
-                title="La importancia de comer sano"
-                allowfullscreen>
-            </iframe>
-        </div>
+<div class="ratio ratio-16x9 shadow rounded mx-auto" style="max-width: 800px;">
+    <iframe 
+        src="https://www.youtube.com/embed/z9ov3C7XM3o"
+        title="La importancia de comer sano"
+        allowfullscreen>
+    </iframe>
+</div>
+
     </div>
 
 </div>
 
 
 
-<!-- ===================================================== -->
-<!-- CARRUSEL DEL FINAL (SEGÚN SI HAY SESIÓN O NO)         -->
-<!-- ===================================================== -->
+
 
 {% if not session.get('usuario') %}
 <div class="container py-5">
     <div class="row align-items-center">
 
         <div class="col-md-6">
-            <div id="carouselInvitado" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <div id="carouselInvitado" class="carousel slide shadow" data-bs-ride="carousel" data-bs-interval="2000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="static/carrusel1.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;">
@@ -139,14 +131,20 @@
             </div>
         </div>
 
-        <div class="col-md-6 text-center">
-            <h2 class="fw-bold mb-4">Solo lo mejor para ti</h2>
-            <p class="fs-5">
-                En FoodFit queremos que te sientas en casa. Aquí cuidar de ti es fácil.
-                Únete y descubre lo bien que se siente empezar.
-            </p>
-            <a href="/iniciar" class="btn btn-primary px-4 mt-3">Comenzar</a>
-        </div>
+<div class="col-md-6">
+    <div class="p-4 bg-white shadow rounded text-center">
+        <h2 class="fw-bold text-primary">Solo lo mejor para ti</h2>
+        <p class="fs-5 text-muted mt-3">
+            En FoodFit queremos que te sientas en casa. Aquí cuidar de ti es fácil.
+            Únete y descubre lo bien que se siente empezar.
+        </p>
+
+        <a href="/iniciar" class="btn btn-primary px-4 mt-3">
+            Comenzar
+        </a>
+    </div>
+</div>
+
 
     </div>
 </div>
@@ -157,7 +155,7 @@
     <div class="row align-items-center">
 
         <div class="col-md-6">
-            <div id="carouselUsuario" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+            <div id="carouselUsuario" class="carousel slide shadow" data-bs-ride="carousel" data-bs-interval="2000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="static/ej1.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;">
@@ -172,12 +170,15 @@
             </div>
         </div>
 
-        <div class="col-md-6 text-center">
-            <h2 class="fw-bold mb-4">Tu Proceso es Único 🌱</h2>
-            <p class="fs-5">
-                Sé constante, celebra tus avances y sigue creciendo cada día.
-            </p>
-        </div>
+ <div class="col-md-6">
+    <div class="p-4 bg-white shadow rounded text-center">
+        <h2 class="fw-bold text-primary">Tu Proceso es Único 🌱</h2>
+        <p class="fs-5 text-muted mt-3">
+            Sé constante, celebra tus avances y sigue creciendo cada día.
+        </p>
+    </div>
+</div>
+
 
     </div>
 </div>

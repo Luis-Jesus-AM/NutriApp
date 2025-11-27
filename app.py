@@ -165,12 +165,17 @@ def iniciar_sesion():
     if usuario is None:
         return "Usuario no encontrado"
 
-
+    # usuario[5] = contraseña
+    # usuario[1] = nombre (según cómo lo usas tú)
     if usuario[5] == password:
-        session["usuario"] = usuario[1]  
+
+        # Guardas SOLO el nombre, igual que antes
+        session["usuario"] = usuario[1]
+
         return redirect(url_for("index"))
     else:
         return "Contraseña incorrecta"
+
 
 
 
