@@ -127,11 +127,10 @@ def calculadora_tmb_get():
 
     return render_template('nutrien.html', **contexto)
 
-
 @app.route("/perfil")
 @login_requerido
 def perfil():
-    usuario_id = session.get("id")   
+    usuario_id = session.get("id")
 
     cur = mysql.connection.cursor()
     cur.execute("SELECT nombre, correo FROM userrs WHERE id = %s", (usuario_id,))
@@ -139,13 +138,15 @@ def perfil():
     cur.close()
 
     if usuario is None:
+        
         return "Usuario no encontrado"
 
     nombre = usuario[0]
     correo = usuario[1]
-    inicial = correo[0].upper() 
+    inicial = correo[0].upper()
 
     return render_template("perfil.html", nombre=nombre, correo=correo, inicial=inicial)
+
 
 
 @app.route("/sesion")
@@ -165,16 +166,19 @@ def iniciar_sesion():
     if usuario is None:
         return "Usuario no encontrado"
 
-    # usuario[5] = contraseña
-    # usuario[1] = nombre (según cómo lo usas tú)
+    # usuario[5] = password (como dijiste)
     if usuario[5] == password:
 
-        # Guardas SOLO el nombre, igual que antes
-        session["usuario"] = usuario[1]
+        # GUARDA ESTO PARA TU PERFIL
+        session["id"] = usuario[0]        # ID del usuario
+        session["nombre"] = usuario[1]    # Nombre
+        session["correo"] = usuario[2]    # Correo
+        session["usuario"] = usuario[1]   # (si quieres dejar este, se puede)
 
-        return redirect(url_for("index"))
+        return redirect(url_for("perfil"))
     else:
         return "Contraseña incorrecta"
+
 
 
 
