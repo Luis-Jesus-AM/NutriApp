@@ -22,9 +22,10 @@
 
             <button type="submit" class="btn btn-primary w-100">Calcular</button>
         </form>
-
+</div>
         {% if macros %}
         <hr>
+         <div class="mt-4 p-4 bg-white rounded shadow">
         <h4 class="text-center mt-4">Resultados</h4>
 
         <ul class="list-group">
@@ -32,9 +33,15 @@
             <li class="list-group-item">Carbohidratos: <strong>{{ macros.carbohidratos }} g</strong></li>
             <li class="list-group-item">Grasas: <strong>{{ macros.grasas }} g</strong></li>
         </ul>
+        </div>
+                        <div class="mt-4 p-4 bg-white rounded shadow">
+            <h4 class="text-center mb-3">¿Que son los macro nutrientes?</h4>
+            <p><strong>Los macronutrientes son los nutrientes que el cuerpo necesita en grandes cantidades para obtener energía y llevar a cabo sus funciones vitales, como el crecimiento, el metabolismo y la reparación de tejidos. Los tres tipos principales son los carbohidratos (que proporcionan energía rápida), las proteínas (esenciales para construir y reparar tejidos) y las grasas o lípidos (que sirven como reserva energética y son cruciales para las hormonas y membranas celulares). </strong></p>
+            <p>  </p>
+        </div>
         {% endif %}
     </div>
-</div>
+
 
 
 {% endblock %}

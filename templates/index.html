@@ -89,19 +89,39 @@
 
 
     
+
+{% if not session.get('usuario') %}
     <div class="mt-5 text-center">
         <h2 class="fw-bold mb-3 text-primary">🎥 La importancia de comer sano</h2>
         <p class="text-muted mb-4">
             Cuidar tu alimentación no solo mejora tu cuerpo, también mejora tu mente, energía y calidad de vida.
         </p>
-
 <div class="ratio ratio-16x9 shadow rounded mx-auto" style="max-width: 800px;">
     <iframe 
         src="https://www.youtube.com/embed/z9ov3C7XM3o"
-        title="La importancia de comer sano"
+        title="Video para invitados"
         allowfullscreen>
     </iframe>
 </div>
+
+{% else %}
+    <div class="mt-5 text-center">
+        <h2 class="fw-bold mb-3 text-primary">🎥 La Nutricion</h2>
+        <p class="text-muted mb-4">
+            Cuidar tu alimentación no solo mejora tu cuerpo, también mejora tu mente, energía y calidad de vida.
+        </p>
+<div class="ratio ratio-16x9 shadow rounded mx-auto" style="max-width: 800px;">
+    <iframe 
+        src="https://www.youtube.com/embed/VuTis6DmIME"
+        title="Video para usuarios"
+        allowfullscreen>
+    </iframe>
+</div>
+
+
+
+{% endif %}
+>
 
     </div>
 
@@ -139,7 +159,7 @@
             Únete y descubre lo bien que se siente empezar.
         </p>
 
-        <a href="/iniciar" class="btn btn-primary px-4 mt-3">
+        <a href="/registros" class="btn btn-primary px-4 mt-3">
             Comenzar
         </a>
     </div>

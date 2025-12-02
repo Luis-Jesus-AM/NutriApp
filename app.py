@@ -10,7 +10,6 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'users'
 
-
 mysql = MySQL(app)
 app.secret_key = "wey_donde_estoy"
 
@@ -45,6 +44,7 @@ def calcular_tmb(peso, altura, edad, genero):
         raise ValueError("Género no válido.")
     return tmb
 
+
 def calcular_get(tmb, actividad):
     factores_actividad = {
         'sedentario': 1.2,
@@ -57,6 +57,7 @@ def calcular_get(tmb, actividad):
         raise ValueError("Nivel de actividad no válido.")
     return tmb * factores_actividad[actividad]
 
+
 def login_requerido(ruta):
     def wrapper(*args, **kwargs):
         if "usuario" not in session:
@@ -66,17 +67,17 @@ def login_requerido(ruta):
     return wrapper
 
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/nutrien")
 def nutrien():
     return render_template("nutrien.html")
 
 
-@app.route('/calculadora', methods=['GET', 'POST'])
+@app.route('/calculadora', methods=['GET', 'POST']) 
 def calculadora_tmb_get():
     contexto = {
         'tmb_resultado': None,
@@ -127,7 +128,8 @@ def calculadora_tmb_get():
 
     return render_template('nutrien.html', **contexto)
 
-@app.route("/perfil")
+
+@app.route("/perfil") 
 @login_requerido
 def perfil():
     usuario_id = session.get("id")
@@ -148,10 +150,10 @@ def perfil():
     return render_template("perfil.html", nombre=nombre, correo=correo, inicial=inicial)
 
 
-
 @app.route("/sesion")
 def sesion():
     return render_template("sesion.html")
+
 
 @app.route("/iniciar-sesion", methods=["POST"])
 def iniciar_sesion():
@@ -166,30 +168,24 @@ def iniciar_sesion():
     if usuario is None:
         return "Usuario no encontrado"
 
-    # usuario[5] = password (como dijiste)
     if usuario[5] == password:
 
-        # GUARDA ESTO PARA TU PERFIL
-        session["id"] = usuario[0]        # ID del usuario
-        session["nombre"] = usuario[1]    # Nombre
-        session["correo"] = usuario[2]    # Correo
-        session["usuario"] = usuario[1]   # (si quieres dejar este, se puede)
+        session["id"] = usuario[0]       
+        session["nombre"] = usuario[1]    
+        session["correo"] = usuario[2]   
+        session["usuario"] = usuario[1]   
 
         return redirect(url_for("perfil"))
     else:
         return "Contraseña incorrecta"
 
 
-
-
-
-
-
 @app.route("/registros")
 def registros():
     return render_template("registros.html")
 
-@app.route("/gasto", methods=["GET", "POST"])
+
+@app.route("/gasto", methods=["GET", "POST"]) 
 def gasto():
     resultado_tmb = None
     resultado_get = None
@@ -233,16 +229,17 @@ def gasto():
             error = f"Error: {str(e)}"
 
     return render_template("gasto.html",
-                           tmb=resultado_tmb,
-                           get=resultado_get,
-                           error=error)
+                        tmb=resultado_tmb,
+                        get=resultado_get,
+                        error=error)
 
 
 @app.route("/peso")
 def peso():
     return render_template("peso.html")
 
-@app.route("/ideal", methods=["GET", "POST"])
+
+@app.route("/ideal", methods=["GET", "POST"]) 
 def ideal():
     peso = None
     edad = None
@@ -260,7 +257,7 @@ def ideal():
     return render_template("peso.html", peso=peso, edad=edad)
 
 
-@app.route("/recetario", methods=["GET", "POST"])
+@app.route("/recetario", methods=["GET", "POST"]) 
 def recetario():
     recipes = None
     ingredient_name = None
@@ -302,10 +299,7 @@ def recetario():
     return render_template("recetario.html", recipes=None, ingredient_name=None)
 
 
-
-
-
-@app.route("/macro", methods=["GET", "POST"])
+@app.route("/macro", methods=["GET", "POST"]) 
 @login_requerido
 def macro():
     if request.method == "POST":
@@ -344,12 +338,14 @@ def macro():
 def imc():
     return render_template("imc.html")
 
+
 @app.route("/ejer")
 @login_requerido
 def ejer():
     return render_template("ejer.html")
 
-@app.route("/imcc", methods=["POST"])
+
+@app.route("/imcc", methods=["POST"]) 
 def imcc():
     try:
         peso = float(request.form["peso"])
@@ -380,13 +376,13 @@ def imcc():
         return render_template("imc.html", error="Error en los datos ingresados")
 
 
-@app.route("/cerrar-sesion")
+@app.route("/cerrar-sesion") 
 def cerrar_sesion():
     session.pop("usuario", None)
     return redirect(url_for("index"))
 
 
-@app.route("/registrar", methods=["POST"])
+@app.route("/registrar", methods=["POST"]) 
 def registrar():
     
     

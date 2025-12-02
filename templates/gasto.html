@@ -49,11 +49,18 @@
         <p class="text-danger text-center mt-3">{{ error }}</p>
     {% endif %}
 
+
     {% if tmb %}
+    
         <div class="mt-4 p-4 bg-white rounded shadow">
             <h4>Resultados</h4>
             <p><strong>TMB (Gasto en reposo):</strong> {{ tmb }} kcal/día</p>
             <p><strong>Gasto total diario:</strong> {{ get }} kcal/día</p>
+        </div>
+                <div class="mt-4 p-4 bg-white rounded shadow">
+            <h4 class="text-center mb-3">¿Que es el gasto calórico total?</h4>
+            <p><strong>El gasto calórico es la cantidad de energía que el cuerpo quema en un día para llevar a cabo funciones vitales como respirar y mantener el corazón funcionando, así como para realizar actividades diarias y ejercicio físico. Se compone de tres partes principales: el metabolismo basal (energía para funciones básicas en reposo), el efecto térmico de los alimentos (energía para la digestión) y la actividad física (energía por el movimiento).</strong></p>
+            <p>  </p>
         </div>
     {% endif %}
 
