@@ -175,7 +175,7 @@ def iniciar_sesion():
         session["correo"] = usuario[2]   
         session["usuario"] = usuario[1]   
 
-        return redirect(url_for("perfil"))
+        return redirect(url_for("index"))
     else:
         return "Contraseña incorrecta"
 
