@@ -14,6 +14,22 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Volcando estructura de base de datos para users
+CREATE DATABASE IF NOT EXISTS `users` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `users`;
+
+-- Volcando estructura para tabla users.userrs
+CREATE TABLE IF NOT EXISTS `userrs` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `paterno` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `materno` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT ' ',
+  `correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ' ',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ' ',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Volcando datos para la tabla users.userrs: 6 rows
 DELETE FROM `userrs`;
 /*!40000 ALTER TABLE `userrs` DISABLE KEYS */;
